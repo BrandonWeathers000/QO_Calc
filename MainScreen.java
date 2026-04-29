@@ -1,10 +1,11 @@
 /**
- * 
+ * Fix rounding errors with BigDecimal class
  */
 
 import java.util.ArrayDeque; // add(), poll(), & peek() methods
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -29,8 +30,6 @@ import java.lang.Math;
 import java.math.BigDecimal;
 
 public class MainScreen extends Application {
-    static double epsilon = 0.000000000000001;
-
     static Queue<Double> mainQueue = new ArrayDeque<>();
     String currentInput = "";
 
@@ -170,10 +169,19 @@ public class MainScreen extends Application {
     }
 
     static void expoQueue() {
-        double result = mainQueue.poll();
+        ArrayList<Double> numberList = new ArrayList<>();
 
         while(!mainQueue.isEmpty()) {
-            result = Math.pow(result, mainQueue.poll());
+            numberList.add(mainQueue.poll());
+        }
+
+        Double result = Math.pow(numberList.get(numberList.size() - 2), numberList.get(numberList.size() - 1));
+        numberList.remove(numberList.size() - 1);
+        numberList.remove(numberList.size() - 1);
+
+        while(!numberList.isEmpty()) {
+            result = Math.pow(numberList.get(numberList.size() - 1), result);
+            numberList.remove(numberList.size() - 1);
         }
 
         mainQueue.add(result);
