@@ -2,10 +2,12 @@
  * Fix rounding errors with BigDecimal class
  */
 
+import java.lang.Math;
+import java.math.BigDecimal;
 import java.util.ArrayDeque; // add(), poll(), & peek() methods
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -26,11 +28,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Stage;
-import java.lang.Math;
-import java.math.BigDecimal;
 
 public class MainScreen extends Application {
-    static Queue<Double> mainQueue = new ArrayDeque<>();
     String currentInput = "";
 
     public static void main(String[] args) {
@@ -39,6 +38,9 @@ public class MainScreen extends Application {
 
     @Override
     public void start(Stage stage) {
+        // The instance of the MathHandler 
+        MathHandler M = new MathHandler();
+
         Label title = new Label("Queue:");
         title.setFont(new Font("Terminess Nerd Font", 50));
         title.setTextFill(Color.WHITE);
@@ -46,7 +48,7 @@ public class MainScreen extends Application {
         Label output = new Label("?");
         output.setFont(new Font("Terminess Nerd Font", 40));
         output.setTextFill(Color.WHITE);
-        output.setText(returnQueuekAsString(mainQueue));
+        output.setText(returnQueuekAsString(M.mainQueue));
 
         Label input = new Label("Input:");
         input.setFont(new Font("Terminess Nerd Font", 40));
@@ -57,40 +59,31 @@ public class MainScreen extends Application {
         root.setStyle("-fx-background-color: black;");
         root.getChildren().addAll(title, output, input);
 
+
         // StackPane root = new StackPane(output);
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
                 if(e.getCode() == KeyCode.C) {
-                    // System.out.println("The 'c' key has been pressed"); // Clearing the screen
-                    mainQueue.clear();
+                    M.mainQueue.clear();
                 } else if(e.getCode() == KeyCode.EQUALS && e.isShiftDown()) { // Basic operations
-                    // System.out.println("The plus key has been pressed");
-                    addQueue();
+                    M.addQueue();
                 } else if(e.getCode() == KeyCode.MINUS) {
-                    // System.out.println("The minus key has been pressed");
-                    subQueue();
+                    M.subQueue();
                 } else if(e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) {
-                    // System.out.println("The astrisk key has been pressed");
-                    mulQueue();
+                    M.mulQueue();
                 } else if(e.getCode() == KeyCode.SLASH) {
-                    // System.out.println("The slash key has been pressed");
-                    divQueue();
+                    M.divQueue();
                 } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
-                    // System.out.println("The carrot key has been pressed");
-                    expoQueue();
+                    M.expoQueue();
                 } else if(e.getCode() == KeyCode.Q) {
-                    // System.out.println("The 'q' key has been pressed"); // Clearing the screen
-                    sqrtQueue();
+                    M.sqrtQueue();
                 } else if (e.getCode() == KeyCode.M  && e.isShiftDown()) {
-                    System.out.println("The 'M' key has been pressed");
-                    findMaxQueue();
+                    M.findMaxQueue();
                 } else if ((e.getCode() == KeyCode.M)) {
-                    System.out.println("The 'm' key has been pressed");
-                    findMinQueue();
+                    M.findMinQueue();
                 }else if(e.getText().matches("\\.")) { // Decimals and number
                     if(currentInput.contains(".")) {
-                        // System.out.println("The decimal is already present");
                     }else {
                         currentInput += e.getText();
                         input.setText("Input: " + currentInput);
@@ -99,12 +92,12 @@ public class MainScreen extends Application {
                     currentInput += e.getText();
                     input.setText("Input: " + currentInput);
                 } else if(e.getCode() == KeyCode.ENTER) { // Push (Enter) the new input
-                    mainQueue.add(Double.valueOf(currentInput));
+                    M.mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
                     input.setText("Input: ");
                 }
 
-                output.setText(returnQueuekAsString(mainQueue));
+                output.setText(returnQueuekAsString(M.mainQueue));
         });
 
         // Possibly helps
@@ -128,91 +121,91 @@ public class MainScreen extends Application {
         return returnString;
     }
 
-    static void addQueue() {
-        double result = mainQueue.poll();
+    // static void addQueue() {
+    //     double result = M.mainQueue.poll();
         
-        while(!mainQueue.isEmpty()) {
-            result += mainQueue.poll();
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         result += M.mainQueue.poll();
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void subQueue() {
-        double result = mainQueue.poll();
+    // static void subQueue() {
+    //     double result = M.mainQueue.poll();
         
-        while(!mainQueue.isEmpty()) {
-            result -= mainQueue.poll();
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         result -= M.mainQueue.poll();
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void mulQueue() {
-        double result = mainQueue.poll();
+    // static void mulQueue() {
+    //     double result = M.mainQueue.poll();
         
-        while(!mainQueue.isEmpty()) {
-            result *= mainQueue.poll();
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         result *= M.mainQueue.poll();
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void divQueue() {
-        double result = mainQueue.poll();
+    // static void divQueue() {
+    //     double result = M.mainQueue.poll();
         
-        while(!mainQueue.isEmpty()) {
-            result /= mainQueue.poll();
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         result /= M.mainQueue.poll();
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void expoQueue() {
-        ArrayList<Double> numberList = new ArrayList<>();
+    // static void expoQueue() {
+    //     ArrayList<Double> numberList = new ArrayList<>();
 
-        while(!mainQueue.isEmpty()) {
-            numberList.add(mainQueue.poll());
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         numberList.add(M.mainQueue.poll());
+    //     }
 
-        Double result = Math.pow(numberList.get(numberList.size() - 2), numberList.get(numberList.size() - 1));
-        numberList.remove(numberList.size() - 1);
-        numberList.remove(numberList.size() - 1);
+    //     Double result = Math.pow(numberList.get(numberList.size() - 2), numberList.get(numberList.size() - 1));
+    //     numberList.remove(numberList.size() - 1);
+    //     numberList.remove(numberList.size() - 1);
 
-        while(!numberList.isEmpty()) {
-            result = Math.pow(numberList.get(numberList.size() - 1), result);
-            numberList.remove(numberList.size() - 1);
-        }
+    //     while(!numberList.isEmpty()) {
+    //         result = Math.pow(numberList.get(numberList.size() - 1), result);
+    //         numberList.remove(numberList.size() - 1);
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void sqrtQueue() {
-        double result = Math.sqrt(mainQueue.peek());
+    // static void sqrtQueue() {
+    //     double result = Math.sqrt(M.mainQueue.peek());
 
-        mainQueue.clear();
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.clear();
+    //     M.mainQueue.add(result);
+    // }
 
-    static void findMinQueue() {
-        double result = mainQueue.poll();
+    // static void findMinQueue() {
+    //     double result = M.mainQueue.poll();
 
-        while(!mainQueue.isEmpty()) {
-            double contender = mainQueue.poll();
-            if(contender < result) result = contender;
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         double contender = M.mainQueue.poll();
+    //         if(contender < result) result = contender;
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 
-    static void findMaxQueue() {
-        double result = mainQueue.poll();
+    // static void findMaxQueue() {
+    //     double result = M.mainQueue.poll();
 
-        while(!mainQueue.isEmpty()) {
-            double contender = mainQueue.poll();
-            if(contender > result) result = contender;
-        }
+    //     while(!M.mainQueue.isEmpty()) {
+    //         double contender = M.mainQueue.poll();
+    //         if(contender > result) result = contender;
+    //     }
 
-        mainQueue.add(result);
-    }
+    //     M.mainQueue.add(result);
+    // }
 }
