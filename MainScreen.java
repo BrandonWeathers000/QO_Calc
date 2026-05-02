@@ -63,28 +63,62 @@ public class MainScreen extends Application {
         // StackPane root = new StackPane(output);
         Scene scene = new Scene(root, 500, 500);
 
+        // scene.setOnKeyPressed(e -> {
+        //         if(e.getCode() == KeyCode.C) {
+        //             M.mainQueue.clear();
+        //             currentInput = "";
+        //             input.setText("Input: ");
+        //         } else if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) { // Basic operations
+        //             M.addQueue();
+        //         } else if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
+        //             M.subQueue();
+        //         } else if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
+        //             M.mulQueue();
+        //         } else if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
+        //             M.divQueue();
+        //         } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
+        //             M.expoQueue();
+        //         } else if(e.getCode() == KeyCode.Q) {
+        //             M.sqrtQueue();
+        //         } else if (e.getCode() == KeyCode.M  && e.isShiftDown()) {
+        //             M.findMaxQueue();
+        //         } else if ((e.getCode() == KeyCode.M)) {
+        //             M.findMinQueue();
+        //         }else if(e.getText().matches("\\.")) { // Decimals and number
+        //             if(currentInput.contains(".")) {
+        //             }else {
+        //                 currentInput += e.getText();
+        //                 input.setText("Input: " + currentInput);
+        //             }
+        //         } else if(e.getText().matches("[0-9]")) {
+        //             currentInput += e.getText();
+        //             input.setText("Input: " + currentInput);
+        //         } else if(e.getCode() == KeyCode.ENTER) { // Push (Enter) the new input
+        //             M.mainQueue.add(Double.valueOf(currentInput));
+        //             currentInput = "";
+        //             input.setText("Input: ");
+        //         }
+
+        //         output.setText(returnQueuekAsString(M.mainQueue));
+        // });
+
         scene.setOnKeyPressed(e -> {
                 if(e.getCode() == KeyCode.C) {
                     M.mainQueue.clear();
                     currentInput = "";
                     input.setText("Input: ");
-                } else if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) { // Basic operations
-                    M.addQueue();
-                } else if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
-                    M.subQueue();
-                } else if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
-                    M.mulQueue();
-                } else if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
-                    M.divQueue();
-                } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
-                    M.expoQueue();
-                } else if(e.getCode() == KeyCode.Q) {
-                    M.sqrtQueue();
-                } else if (e.getCode() == KeyCode.M  && e.isShiftDown()) {
-                    M.findMaxQueue();
-                } else if ((e.getCode() == KeyCode.M)) {
-                    M.findMinQueue();
-                }else if(e.getText().matches("\\.")) { // Decimals and number
+                }
+
+                if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) M.addQueue();
+                if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) M.subQueue();
+				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) M.mulQueue();
+				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) M.divQueue();
+				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) M.expoQueue();
+				if(e.getCode() == KeyCode.Q) M.sqrtQueue();
+				if (e.getCode() == KeyCode.M  && e.isShiftDown()) M.findMaxQueue();
+				if ((e.getCode() == KeyCode.M)) M.findMinQueue();
+
+				if(e.getText().matches("\\.")) { // Decimals and number
                     if(currentInput.contains(".")) {
                     }else {
                         currentInput += e.getText();
@@ -93,7 +127,9 @@ public class MainScreen extends Application {
                 } else if(e.getText().matches("[0-9]")) {
                     currentInput += e.getText();
                     input.setText("Input: " + currentInput);
-                } else if(e.getCode() == KeyCode.ENTER) { // Push (Enter) the new input
+                }
+
+                if(e.getCode() == KeyCode.ENTER) { // Press (Enter) the new input
                     M.mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
                     input.setText("Input: ");
