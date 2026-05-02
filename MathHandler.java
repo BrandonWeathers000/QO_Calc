@@ -47,7 +47,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void expoQueue() {
+    static void expoQueueTopToBottom() {
         ArrayList<Double> numberList = new ArrayList<>();
 
         while(!mainQueue.isEmpty()) {
@@ -64,6 +64,20 @@ class MathHandler {
         }
 
         mainQueue.add(result);
+    }
+
+    static void expoQueueLeftToRight() {
+       System.out.println("The function has been entered"); 
+
+        double result = mainQueue.poll();
+        double exponent = mainQueue.poll();
+
+        while(!mainQueue.isEmpty()) {
+            exponent *= mainQueue.poll();
+        }
+
+        mainQueue.clear();
+        mainQueue.add(Math.pow(result, exponent));
     }
 
     static void sqrtQueue() {
