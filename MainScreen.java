@@ -63,45 +63,6 @@ public class MainScreen extends Application {
         // StackPane root = new StackPane(output);
         Scene scene = new Scene(root, 500, 500);
 
-        // scene.setOnKeyPressed(e -> {
-        //         if(e.getCode() == KeyCode.C) {
-        //             M.mainQueue.clear();
-        //             currentInput = "";
-        //             input.setText("Input: ");
-        //         } else if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) { // Basic operations
-        //             M.addQueue();
-        //         } else if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
-        //             M.subQueue();
-        //         } else if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
-        //             M.mulQueue();
-        //         } else if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
-        //             M.divQueue();
-        //         } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
-        //             M.expoQueue();
-        //         } else if(e.getCode() == KeyCode.Q) {
-        //             M.sqrtQueue();
-        //         } else if (e.getCode() == KeyCode.M  && e.isShiftDown()) {
-        //             M.findMaxQueue();
-        //         } else if ((e.getCode() == KeyCode.M)) {
-        //             M.findMinQueue();
-        //         }else if(e.getText().matches("\\.")) { // Decimals and number
-        //             if(currentInput.contains(".")) {
-        //             }else {
-        //                 currentInput += e.getText();
-        //                 input.setText("Input: " + currentInput);
-        //             }
-        //         } else if(e.getText().matches("[0-9]")) {
-        //             currentInput += e.getText();
-        //             input.setText("Input: " + currentInput);
-        //         } else if(e.getCode() == KeyCode.ENTER) { // Push (Enter) the new input
-        //             M.mainQueue.add(Double.valueOf(currentInput));
-        //             currentInput = "";
-        //             input.setText("Input: ");
-        //         }
-
-        //         output.setText(returnQueuekAsString(M.mainQueue));
-        // });
-
         scene.setOnKeyPressed(e -> {
                 if(e.getCode() == KeyCode.C) {
                     M.mainQueue.clear();
@@ -113,7 +74,8 @@ public class MainScreen extends Application {
                 if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) M.subQueue();
 				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) M.mulQueue();
 				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) M.divQueue();
-				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) M.expoQueue();
+				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown() && e.isControlDown()) M.expoQueueLeftToRight();
+				else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) M.expoQueueTopToBottom();
 				if(e.getCode() == KeyCode.Q) M.sqrtQueue();
 				if (e.getCode() == KeyCode.M  && e.isShiftDown()) M.findMaxQueue();
 				if ((e.getCode() == KeyCode.M)) M.findMinQueue();
@@ -127,6 +89,13 @@ public class MainScreen extends Application {
                 } else if(e.getText().matches("[0-9]")) {
                     currentInput += e.getText();
                     input.setText("Input: " + currentInput);
+                }
+
+                if(e.getCode() == KeyCode.BACK_SPACE) {
+                    if(!currentInput.isEmpty()) {
+                        currentInput = currentInput.substring(0, currentInput.length() - 1);
+                        input.setText("Input: " + currentInput);
+                    }
                 }
 
                 if(e.getCode() == KeyCode.ENTER) { // Press (Enter) the new input
@@ -159,91 +128,4 @@ public class MainScreen extends Application {
         return returnString;
     }
 
-    // static void addQueue() {
-    //     double result = M.mainQueue.poll();
-        
-    //     while(!M.mainQueue.isEmpty()) {
-    //         result += M.mainQueue.poll();
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void subQueue() {
-    //     double result = M.mainQueue.poll();
-        
-    //     while(!M.mainQueue.isEmpty()) {
-    //         result -= M.mainQueue.poll();
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void mulQueue() {
-    //     double result = M.mainQueue.poll();
-        
-    //     while(!M.mainQueue.isEmpty()) {
-    //         result *= M.mainQueue.poll();
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void divQueue() {
-    //     double result = M.mainQueue.poll();
-        
-    //     while(!M.mainQueue.isEmpty()) {
-    //         result /= M.mainQueue.poll();
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void expoQueue() {
-    //     ArrayList<Double> numberList = new ArrayList<>();
-
-    //     while(!M.mainQueue.isEmpty()) {
-    //         numberList.add(M.mainQueue.poll());
-    //     }
-
-    //     Double result = Math.pow(numberList.get(numberList.size() - 2), numberList.get(numberList.size() - 1));
-    //     numberList.remove(numberList.size() - 1);
-    //     numberList.remove(numberList.size() - 1);
-
-    //     while(!numberList.isEmpty()) {
-    //         result = Math.pow(numberList.get(numberList.size() - 1), result);
-    //         numberList.remove(numberList.size() - 1);
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void sqrtQueue() {
-    //     double result = Math.sqrt(M.mainQueue.peek());
-
-    //     M.mainQueue.clear();
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void findMinQueue() {
-    //     double result = M.mainQueue.poll();
-
-    //     while(!M.mainQueue.isEmpty()) {
-    //         double contender = M.mainQueue.poll();
-    //         if(contender < result) result = contender;
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
-
-    // static void findMaxQueue() {
-    //     double result = M.mainQueue.poll();
-
-    //     while(!M.mainQueue.isEmpty()) {
-    //         double contender = M.mainQueue.poll();
-    //         if(contender > result) result = contender;
-    //     }
-
-    //     M.mainQueue.add(result);
-    // }
 }
