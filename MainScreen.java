@@ -66,13 +66,15 @@ public class MainScreen extends Application {
         scene.setOnKeyPressed(e -> {
                 if(e.getCode() == KeyCode.C) {
                     M.mainQueue.clear();
-                } else if(e.getCode() == KeyCode.EQUALS && e.isShiftDown()) { // Basic operations
+                    currentInput = "";
+                    input.setText("Input: ");
+                } else if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) { // Basic operations
                     M.addQueue();
-                } else if(e.getCode() == KeyCode.MINUS) {
+                } else if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
                     M.subQueue();
-                } else if(e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) {
+                } else if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
                     M.mulQueue();
-                } else if(e.getCode() == KeyCode.SLASH) {
+                } else if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
                     M.divQueue();
                 } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
                     M.expoQueue();
