@@ -8,13 +8,12 @@ This is a calculator based on the queue data structure. I hope you find it usefu
 
 ## Development Roadmap
 1. Migration to BigDecimal
-2. Popup menu for all available functions and their
-3. Addition useful functions
+2. Addition useful functions
     1. Log (base 10, 2, and e, and x)
     2. Square root (base n)
     3. Mean, median, mode, and standard deviation
     4. Factorials, combination, and permutation
     5. Trig functions (sine, cosine, tangent, arcsine, arccosine, arctangent, hyperbolic sine, hyperbolic cosine, and hyperbolic tangent)
-4. Support for four queues
-5. Constants (pi, e, and phi)
-6. Special exponentiation (e^x, 10^x)
+3. Support for four queues
+4. Constants (pi, e, and phi)
+5. Special exponentiation (e^x, 10^x)
