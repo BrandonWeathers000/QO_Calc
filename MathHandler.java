@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 class MathHandler {
-    static Queue<Double> mainQueue = new ArrayDeque<>();
+    Queue<Double> mainQueue = new ArrayDeque<>(); // Cannot be static
     
-    static void addQueue() {
+    void addQueue() {
         double result = mainQueue.poll();
         
         while(!mainQueue.isEmpty()) {
@@ -17,7 +17,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void subQueue() {
+    void subQueue() {
         double result = mainQueue.poll();
         
         while(!mainQueue.isEmpty()) {
@@ -27,7 +27,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void mulQueue() {
+    void mulQueue() {
         double result = mainQueue.poll();
         
         while(!mainQueue.isEmpty()) {
@@ -37,7 +37,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void divQueue() {
+    void divQueue() {
         double result = mainQueue.poll();
         
         while(!mainQueue.isEmpty()) {
@@ -47,7 +47,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void expoQueueTopToBottom() {
+    void expoQueueTopToBottom() {
         ArrayList<Double> numberList = new ArrayList<>();
 
         while(!mainQueue.isEmpty()) {
@@ -66,7 +66,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void expoQueueLeftToRight() {
+    void expoQueueLeftToRight() {
         double result = mainQueue.poll();
         double exponent = mainQueue.poll();
 
@@ -78,14 +78,14 @@ class MathHandler {
         mainQueue.add(Math.pow(result, exponent));
     }
 
-    static void sqrtQueue() {
+    void sqrtQueue() {
         double result = Math.sqrt(mainQueue.peek());
 
         mainQueue.clear();
         mainQueue.add(result);
     }
 
-    static void findMinQueue() {
+    void findMinQueue() {
         double result = mainQueue.poll();
 
         while(!mainQueue.isEmpty()) {
@@ -96,7 +96,7 @@ class MathHandler {
         mainQueue.add(result);
     }
 
-    static void findMaxQueue() {
+    void findMaxQueue() {
         double result = mainQueue.poll();
 
         while(!mainQueue.isEmpty()) {
