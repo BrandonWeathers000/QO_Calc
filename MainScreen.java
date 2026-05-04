@@ -43,7 +43,7 @@ public class MainScreen extends Application {
         Label queue0Output = new Label("?");
         queue0Output.setFont(new Font("Terminess Nerd Font", 40));
         queue0Output.setTextFill(Color.WHITE);
-        queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, false));
+        queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, true));
 
         // Queue 1 label and its output
         Label queue1Label = new Label("Sub-queue one");
@@ -83,12 +83,17 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
+                // Moving the cursor
                 if(e.getCode() == KeyCode.H) {
                     currentIndex = 0;
                 } else if(e.getCode() == KeyCode.L) {
                     currentIndex = 1;
                 }
-                System.out.println("The index is " + currentIndex);
+
+                // Agrigating the MathHandlers
+                if(e.getCode() == KeyCode.H && e.isShiftDown()) {
+                    queueAgrigator(mathHandlerArray);
+                }
 
                 if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) mathHandlerArray[currentIndex].addQueue();
                 if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) mathHandlerArray[currentIndex].subQueue();
@@ -162,5 +167,12 @@ public class MainScreen extends Application {
         }
 
         return returnString;
+    }
+
+    static void queueAgrigator(MathHandler[] inputArray) {
+        for(Double currentDouble : inputArray[1].mainQueue) {
+            inputArray[0].mainQueue.add(currentDouble);
+        }
+        inputArray[1].mainQueue.clear();
     }
 }
