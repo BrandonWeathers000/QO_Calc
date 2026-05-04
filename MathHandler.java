@@ -67,8 +67,6 @@ class MathHandler {
     }
 
     static void expoQueueLeftToRight() {
-       System.out.println("The function has been entered"); 
-
         double result = mainQueue.poll();
         double exponent = mainQueue.poll();
 
