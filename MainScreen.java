@@ -1,33 +1,21 @@
 /**
- * Fix rounding errors with BigDecimal class
+ * TODO:
+ * - Add multiple queues
+ * - Fix rounding errors with special BigDecimal class
  */
 
 import java.lang.Math;
-import java.math.BigDecimal;
-import java.util.ArrayDeque; // add(), poll(), & peek() methods
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import javafx.application.Application;
+import java.util.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 public class MainScreen extends Application {
     String currentInput = "";
@@ -41,33 +29,59 @@ public class MainScreen extends Application {
         // The instance of the MathHandler 
         MathHandler M = new MathHandler();
 
-        Label title = new Label("Queue:");
-        title.setFont(new Font("Terminess Nerd Font", 50));
-        title.setTextFill(Color.WHITE);
+        // Queue 0 label and its output
+        Label queue0Label = new Label("Master queue");
+        queue0Label.setFont(new Font("Terminess Nerd Font", 40));
+        queue0Label.setTextFill(Color.WHITE);
+        queue0Label.setUnderline(true);
 
-        Label output = new Label("?");
-        output.setFont(new Font("Terminess Nerd Font", 40));
-        output.setTextFill(Color.WHITE);
-        output.setText(returnQueuekAsString(M.mainQueue));
+        Label queue0Output = new Label("?");
+        queue0Output.setFont(new Font("Terminess Nerd Font", 40));
+        queue0Output.setTextFill(Color.WHITE);
+        queue0Output.setText(returnQueuekAsString(M.mainQueue));
 
-        Label input = new Label("Input:");
+        // Queue 1 label and its output
+        Label queue1Label = new Label("Sub-queue one");
+        queue1Label.setFont(new Font("Terminess Nerd Font", 40));
+        queue1Label.setTextFill(Color.WHITE);
+        queue1Label.setUnderline(true);
+
+        Label queue1Output = new Label("?");
+        queue1Output.setFont(new Font("Terminess Nerd Font", 40));
+        queue1Output.setTextFill(Color.WHITE);
+        queue1Output.setText(returnQueuekAsString(M.mainQueue));
+
+        GridPane mainGrid = new GridPane();
+        mainGrid.setHgap(30.0);
+        mainGrid.setVgap(30.0);
+        mainGrid.add(queue0Label, 0, 0);
+        mainGrid.add(queue1Label, 1, 0);
+        mainGrid.add(queue0Output, 0, 1);
+        mainGrid.add(queue1Output, 1, 1);
+
+        // Seperator line between queues and input
+        Line myLine = new Line();
+        myLine.setStartX(0.0);
+        myLine.setStartY(0.0);
+        myLine.setEndX(1000.0);
+        myLine.setEndY(0.0);
+        myLine.setStyle("-fx-stroke: white;");
+
+        Label input = new Label("\nInput:");
         input.setFont(new Font("Terminess Nerd Font", 40));
         input.setTextFill(Color.WHITE);
-        // output.setText();
 
-        VBox root = new VBox(10);
+        VBox root = new VBox();
         root.setStyle("-fx-background-color: black;");
-        root.getChildren().addAll(title, output, input);
+        root.getChildren().addAll(mainGrid, myLine, input);
 
-
-        // StackPane root = new StackPane(output);
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
                 if(e.getCode() == KeyCode.C) {
                     M.mainQueue.clear();
                     currentInput = "";
-                    input.setText("Input: ");
+                    input.setText("\nInput: ");
                 }
 
                 if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) M.addQueue();
@@ -84,27 +98,28 @@ public class MainScreen extends Application {
                     if(currentInput.contains(".")) {
                     }else {
                         currentInput += e.getText();
-                        input.setText("Input: " + currentInput);
+                        input.setText("\nInput: " + currentInput);
                     }
                 } else if(e.getText().matches("[0-9]")) {
                     currentInput += e.getText();
-                    input.setText("Input: " + currentInput);
+                    input.setText("\nInput: " + currentInput);
                 }
 
                 if(e.getCode() == KeyCode.BACK_SPACE) {
                     if(!currentInput.isEmpty()) {
                         currentInput = currentInput.substring(0, currentInput.length() - 1);
-                        input.setText("Input: " + currentInput);
+                        input.setText("\nInput: " + currentInput);
                     }
                 }
 
                 if(e.getCode() == KeyCode.ENTER) { // Press (Enter) the new input
                     M.mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
-                    input.setText("Input: ");
+                    input.setText("\nInput: ");
                 }
 
-                output.setText(returnQueuekAsString(M.mainQueue));
+                queue0Output.setText(returnQueuekAsString(M.mainQueue));
+                queue1Output.setText(returnQueuekAsString(M.mainQueue));
         });
 
         // Possibly helps
@@ -120,12 +135,11 @@ public class MainScreen extends Application {
         String returnString = "";
 
         for(Double currentElement : inputQueue) {
-            returnString += "   " + currentElement + "\n";
+            returnString += "     " + currentElement + "\n";
         }
 
-        returnString += ">>>";
+        returnString += "  >>>";
 
         return returnString;
     }
-
 }
