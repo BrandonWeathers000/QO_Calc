@@ -43,7 +43,7 @@ public class MainScreen extends Application {
         Label queue0Output = new Label("?");
         queue0Output.setFont(new Font("Terminess Nerd Font", 40));
         queue0Output.setTextFill(Color.WHITE);
-        queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue));
+        queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, false));
 
         // Queue 1 label and its output
         Label queue1Label = new Label("Sub-queue one");
@@ -54,7 +54,7 @@ public class MainScreen extends Application {
         Label queue1Output = new Label("?");
         queue1Output.setFont(new Font("Terminess Nerd Font", 40));
         queue1Output.setTextFill(Color.WHITE);
-        queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue));
+        queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, false));
 
         GridPane mainGrid = new GridPane();
         mainGrid.setHgap(30.0);
@@ -83,6 +83,12 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
+                if(e.getCode() == KeyCode.H) {
+                    currentIndex = 0;
+                } else if(e.getCode() == KeyCode.L) {
+                    currentIndex = 1;
+                }
+                System.out.println("The index is " + currentIndex);
 
                 if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) mathHandlerArray[currentIndex].addQueue();
                 if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) mathHandlerArray[currentIndex].subQueue();
@@ -124,13 +130,13 @@ public class MainScreen extends Application {
                     input.setText("\nInput: ");
                 }
 
-                queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue));
-                queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue)); // For some reason, this copies over the MathHandler from the 0th index
-
-                if(e.getCode() == KeyCode.H) {
-                    currentIndex--;
-                } else if(e.getCode() == KeyCode.L) {
-                    currentIndex++;
+                if(currentIndex == 0) {
+                    queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, true));
+                    queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, false));
+                } else if(currentIndex == 1) {
+                    queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, false));
+                    queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, true));
+                    
                 }
             });
 
@@ -144,14 +150,16 @@ public class MainScreen extends Application {
         stage.show();
     }
 
-    static String returnQueuekAsString(Queue<Double> inputQueue) {
+    static String returnQueuekAsString(Queue<Double> inputQueue, boolean currentlySelected) {
         String returnString = "";
 
         for(Double currentElement : inputQueue) {
             returnString += "     " + currentElement + "\n";
         }
 
-        returnString += "  >>>";
+        if(currentlySelected) {
+            returnString += "  >>>";
+        }
 
         return returnString;
     }
