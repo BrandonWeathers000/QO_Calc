@@ -1,0 +1,141 @@
+% Created 2026-05-25 Mon 23:25
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Brandon Weathers}
+\date{05/25/2026}
+\title{The Queue Oriented Calculator (QO Calc) Official Manual}
+\hypersetup{
+ pdfauthor={Brandon Weathers},
+ pdftitle={The Queue Oriented Calculator (QO Calc) Official Manual},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\section*{Introduction}
+\label{sec:orgedb865f}
+This is a calculator based on the queue data structure.
+There is a master queue, which your cursor in on by default, and a sub-queue, used for auxiliary calculations.
+By default you enter numbers into a given queue and then press a operation to act over that function.
+Because of the queue's nature, arguments will be dealt with in the order they where entered.
+Examples of this will be shown in the following section.
+In the function heading the title of each sub-heading is the title of the operation followed by its keybind in parenthesis. 
+When referring to a single arbitrary queue its elements will be named from x\textsubscript{1} to x\textsubscript{n}.
+When referring specifically to the master and sub-queues, they will be named a\textsubscript{1} to a\textsubscript{n} and b\textsubscript{1} to b\textsubscript{n} accordingly.
+\section*{Arithmetic}
+\label{sec:org0ca75f7}
+\subsection*{Addition (+)}
+\label{sec:org7ecaa46}
+$$
+x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
+$$
+\subsection*{Subtraction (-)}
+\label{sec:org1328aed}
+$$
+x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
+$$
+\subsection*{Multiplication (*)}
+\label{sec:org38959ba}
+$$
+x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
+$$
+\subsection*{Division (/)}
+\label{sec:org2714208}
+$$
+x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
+$$
+\subsection*{Exponentiation}
+\label{sec:org701a1b5}
+\subsubsection*{Left-to-right exponentiation (\^{})}
+\label{sec:org6755554}
+$$
+x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
+$$
+\subsubsection*{Right-to-left exponentiation (c-\^{})}
+\label{sec:org0da46fb}
+$$
+x_1 := x_1^{x_2^{x_3^{...x_n}}}
+$$
+\subsection*{Logarithms (L)}
+\label{sec:orga557918}
+$$
+x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
+$$
+\section*{General}
+\label{sec:org00253c4}
+\subsection*{Move Cursor Right (l)}
+\label{sec:org9272cc3}
+Moves the cursor to the right to select the rightmost queue.
+\subsection*{Move Cursor Left (h)}
+\label{sec:org50656a0}
+Moves the cursor to the left to select the leftmost  queue.
+\subsection*{Clear Selected Queue (c)}
+\label{sec:orge5ce5d8}
+Removes all elements from the selected queues.
+\subsection*{Agreegate All Queues to the Right (H)}
+\label{sec:org02bd9f7}
+No matter which queue the cursor is on, all elements get appended to the end of the master queue.
+$$
+x_1 := x_1
+$$
+$$
+x_2 := x_2
+$$
+$$
+x_3 := x_3
+$$
+$$
+...
+$$
+$$
+x_{2-n} := y_{2-m}
+$$
+$$
+x_{1-n} := y_{1-m}
+$$
+$$
+x_{n} := y_{m}
+$$
+\section*{Roots}
+\label{sec:org9e04a3a}
+\subsection*{Square Root (q)}
+\label{sec:org3cca987}
+For each element in the array
+$$
+x_1 := \sqrt{x_1}
+$$
+$$
+x_2 := \sqrt{x_2}
+$$
+$$
+x_3 := \sqrt{x_3}
+$$
+$$
+...
+$$
+$$
+x_n := \sqrt{x_n}
+$$
+\section*{Statistics}
+\label{sec:orgea2adc0}
+\subsection*{Maximum (M)}
+\label{sec:orgf1a52ff}
+x\textsubscript{1} := MIN \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
+\subsection*{Minimum (m)}
+\label{sec:orgcbb4519}
+x\textsubscript{1} := MAX \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
+\end{document}

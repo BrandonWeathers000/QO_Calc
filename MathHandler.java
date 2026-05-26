@@ -78,11 +78,29 @@ class MathHandler {
         mainQueue.add(Math.pow(result, exponent));
     }
 
+    void logQueue() {
+        double result = mainQueue.poll();
+
+        while(!mainQueue.isEmpty()) {
+            result = customLog(result, mainQueue.poll());
+        }
+
+        mainQueue.add(result);
+    }
+
+    private static double customLog(double base, double logNumber) {
+        return Math.log(logNumber) / Math.log(base);
+    }
+
     void sqrtQueue() {
-        double result = Math.sqrt(mainQueue.peek());
+        Queue<Double> resultQueue = new ArrayDeque<>();
+
+        while(!mainQueue.isEmpty()) {
+            resultQueue.add(Math.sqrt(mainQueue.poll()));
+        }
 
         mainQueue.clear();
-        mainQueue.add(result);
+        mainQueue = resultQueue;
     }
 
     void findMinQueue() {

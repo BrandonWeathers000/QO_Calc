@@ -46,7 +46,7 @@ public class MainScreen extends Application {
         queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, true));
 
         // Queue 1 label and its output
-        Label queue1Label = new Label("Sub-queue one");
+        Label queue1Label = new Label("Sub-queue");
         queue1Label.setFont(new Font("Terminess Nerd Font", 40));
         queue1Label.setTextFill(Color.WHITE);
         queue1Label.setUnderline(true);
@@ -86,7 +86,9 @@ public class MainScreen extends Application {
                 // Moving the cursor
                 if(e.getCode() == KeyCode.H) {
                     currentIndex = 0;
-                } else if(e.getCode() == KeyCode.L) {
+                } else if(e.getCode() == KeyCode.L && e.isShiftDown()) {
+                    mathHandlerArray[currentIndex].logQueue();
+                }else if(e.getCode() == KeyCode.L) {
                     currentIndex = 1;
                 }
 
@@ -95,16 +97,40 @@ public class MainScreen extends Application {
                     queueAgrigator(mathHandlerArray);
                 }
 
-                if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) mathHandlerArray[currentIndex].addQueue();
-                if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) mathHandlerArray[currentIndex].subQueue();
-				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) mathHandlerArray[currentIndex].mulQueue();
-				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) mathHandlerArray[currentIndex].divQueue();
-				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown() && e.isControlDown()) mathHandlerArray[currentIndex].expoQueueLeftToRight();
-				else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) mathHandlerArray[currentIndex].expoQueueTopToBottom();
-				if(e.getCode() == KeyCode.Q) mathHandlerArray[currentIndex].sqrtQueue();
-				if (e.getCode() == KeyCode.M  && e.isShiftDown()) mathHandlerArray[currentIndex].findMaxQueue();
-				if ((e.getCode() == KeyCode.M)) mathHandlerArray[currentIndex].findMinQueue();
+                // Operations
+                if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) {
+                    mathHandlerArray[currentIndex].addQueue();
+                }
 
+                if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
+                    mathHandlerArray[currentIndex].subQueue();   
+                }
+
+				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
+                    mathHandlerArray[currentIndex].mulQueue();   
+                }
+
+				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
+                    mathHandlerArray[currentIndex].divQueue();
+                }
+
+				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown() && e.isControlDown()) {
+                    mathHandlerArray[currentIndex].expoQueueTopToBottom();
+                } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
+                    mathHandlerArray[currentIndex].expoQueueLeftToRight();
+                }
+
+				if(e.getCode() == KeyCode.Q) {
+                    mathHandlerArray[currentIndex].sqrtQueue();
+                }
+
+				if(e.getCode() == KeyCode.M  && e.isShiftDown()) {
+                    mathHandlerArray[currentIndex].findMaxQueue();
+                } else if((e.getCode() == KeyCode.M)) {
+                    mathHandlerArray[currentIndex].findMinQueue();
+                }
+
+                // Entering digits and decimal point
 				if(e.getText().matches("\\.")) { // Decimals and number
                     if(currentInput.contains(".")) {
                     }else {
@@ -116,6 +142,7 @@ public class MainScreen extends Application {
                     input.setText("\nInput: " + currentInput);
                 }
 
+                // Deleting input digits
                 if(e.getCode() == KeyCode.BACK_SPACE) {
                     if(!currentInput.isEmpty()) {
                         currentInput = currentInput.substring(currentIndex, currentInput.length() - 1);
@@ -123,7 +150,8 @@ public class MainScreen extends Application {
                     }
                 }
 
-                if(e.getCode() == KeyCode.ENTER) { // Press (Enter) the new input
+                // Press (Enter) the new input
+                if(e.getCode() == KeyCode.ENTER) {
                     mathHandlerArray[currentIndex].mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
                     input.setText("\nInput: ");
