@@ -12,36 +12,6 @@ Examples of this will be shown in the following section.
 In the function heading the title of each sub-heading is the title of the operation followed by its keybind in parenthesis. 
 When referring to a single arbitrary queue its elements will be named from x_1 to x_n.
 When referring specifically to the master and sub-queues, they will be named a_1 to a_n and b_1 to b_n accordingly.
-* Arithmetic
-** Addition (+)
-$$
-x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
-$$
-** Subtraction (-)
-$$
-x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
-$$
-** Multiplication (*)
-$$
-x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
-$$
-** Division (/)
-$$
-x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
-$$
-** Exponentiation
-*** Left-to-right exponentiation (^)
-$$
-x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
-$$
-*** Right-to-left exponentiation (c-^)
-$$
-x_1 := x_1^{x_2^{x_3^{...x_n}}}
-$$
-** Logarithms (L)
-$$
-x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
-$$
 * General
 ** Move Cursor Right (l)
 Moves the cursor to the right to select the rightmost queue.
@@ -72,6 +42,36 @@ $$
 $$
 x_{n} := y_{m}
 $$
+* Arithmetic
+** Addition (+)
+$$
+x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
+$$
+** Subtraction (-)
+$$
+x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
+$$
+** Multiplication (*)
+$$
+x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
+$$
+** Division (/)
+$$
+x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
+$$
+** Exponentiation
+*** Left-to-right exponentiation (^)
+$$
+x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
+$$
+*** Right-to-left exponentiation (c-^)
+$$
+x_1 := x_1^{x_2^{x_3^{...x_n}}}
+$$
+** Logarithms (L)
+$$
+x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
+$$
 * Roots
 ** Square Root (q)
 For each element in the array
@@ -89,6 +89,10 @@ $$
 $$
 $$
 x_n := \sqrt{x_n}
+$$
+** Custom Square Root (Q) 
+$$
+x_1 := \sqrt[x_1]{\sqrt[x_2]{\sqrt[x_3]{...\sqrt[x_{n-1}]{x_n}}}}
 $$
 * Statistics
 ** Maximum (M)

@@ -120,7 +120,9 @@ public class MainScreen extends Application {
                     mathHandlerArray[currentIndex].expoQueueLeftToRight();
                 }
 
-				if(e.getCode() == KeyCode.Q) {
+                if(e.getCode() == KeyCode.Q && e.isShiftDown()) {
+                    mathHandlerArray[currentIndex].customSqrtQueue();
+                } else if(e.getCode() == KeyCode.Q) {
                     mathHandlerArray[currentIndex].sqrtQueue();
                 }
 
