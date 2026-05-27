@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.util.ArrayDeque; // add(), poll(), & peek() methods
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.Stack;
 
 class MathHandler {
     Queue<Double> mainQueue = new ArrayDeque<>(); // Cannot be static
@@ -119,6 +120,22 @@ class MathHandler {
 
         mainQueue.clear();
         mainQueue = resultQueue;
+    }
+
+    void customSqrtQueue() {
+        Stack<Double> newStack = new Stack<>();
+
+        while(!mainQueue.isEmpty()) {
+            newStack.push(mainQueue.poll());
+        }
+
+        mainQueue.add(newStack.pop());
+
+        while(!newStack.isEmpty()) {
+            mainQueue.add(1.0/newStack.pop());
+        }
+
+        expoQueueLeftToRight();
     }
 
     void findMinQueue() {
