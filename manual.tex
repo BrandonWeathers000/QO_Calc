@@ -1,4 +1,4 @@
-% Created 2026-05-25 Mon 23:25
+% Created 2026-05-26 Tue 16:09
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt]{article}
 
@@ -27,7 +27,7 @@
 
 \maketitle
 \section*{Introduction}
-\label{sec:orgedb865f}
+\label{sec:org13efa67}
 This is a calculator based on the queue data structure.
 There is a master queue, which your cursor in on by default, and a sub-queue, used for auxiliary calculations.
 By default you enter numbers into a given queue and then press a operation to act over that function.
@@ -36,58 +36,19 @@ Examples of this will be shown in the following section.
 In the function heading the title of each sub-heading is the title of the operation followed by its keybind in parenthesis. 
 When referring to a single arbitrary queue its elements will be named from x\textsubscript{1} to x\textsubscript{n}.
 When referring specifically to the master and sub-queues, they will be named a\textsubscript{1} to a\textsubscript{n} and b\textsubscript{1} to b\textsubscript{n} accordingly.
-\section*{Arithmetic}
-\label{sec:org0ca75f7}
-\subsection*{Addition (+)}
-\label{sec:org7ecaa46}
-$$
-x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
-$$
-\subsection*{Subtraction (-)}
-\label{sec:org1328aed}
-$$
-x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
-$$
-\subsection*{Multiplication (*)}
-\label{sec:org38959ba}
-$$
-x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
-$$
-\subsection*{Division (/)}
-\label{sec:org2714208}
-$$
-x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
-$$
-\subsection*{Exponentiation}
-\label{sec:org701a1b5}
-\subsubsection*{Left-to-right exponentiation (\^{})}
-\label{sec:org6755554}
-$$
-x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
-$$
-\subsubsection*{Right-to-left exponentiation (c-\^{})}
-\label{sec:org0da46fb}
-$$
-x_1 := x_1^{x_2^{x_3^{...x_n}}}
-$$
-\subsection*{Logarithms (L)}
-\label{sec:orga557918}
-$$
-x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
-$$
 \section*{General}
-\label{sec:org00253c4}
+\label{sec:org83b60b3}
 \subsection*{Move Cursor Right (l)}
-\label{sec:org9272cc3}
+\label{sec:org48bacca}
 Moves the cursor to the right to select the rightmost queue.
 \subsection*{Move Cursor Left (h)}
-\label{sec:org50656a0}
+\label{sec:orga2f1484}
 Moves the cursor to the left to select the leftmost  queue.
 \subsection*{Clear Selected Queue (c)}
-\label{sec:orge5ce5d8}
+\label{sec:org5019883}
 Removes all elements from the selected queues.
 \subsection*{Agreegate All Queues to the Right (H)}
-\label{sec:org02bd9f7}
+\label{sec:org6551b3e}
 No matter which queue the cursor is on, all elements get appended to the end of the master queue.
 $$
 x_1 := x_1
@@ -110,11 +71,85 @@ $$
 $$
 x_{n} := y_{m}
 $$
+\section*{Arithmetic}
+\label{sec:org00f1dff}
+\subsection*{Addition (+)}
+\label{sec:orgafaadeb}
+$$
+x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
+$$
+\subsection*{Subtraction (-)}
+\label{sec:org53581a0}
+$$
+x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
+$$
+\subsection*{Multiplication (*)}
+\label{sec:org2b841c8}
+$$
+x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
+$$
+\subsection*{Division (/)}
+\label{sec:org417f7f9}
+$$
+x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
+$$
+\subsection*{Exponentiation}
+\label{sec:org5a52368}
+\subsubsection*{Left-to-right exponentiation (\^{})}
+\label{sec:org5a3957f}
+$$
+x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
+$$
+\subsubsection*{Right-to-left exponentiation (c-\^{})}
+\label{sec:org8bd7d6c}
+$$
+x_1 := x_1^{x_2^{x_3^{...x_n}}}
+$$
+\subsection*{Logarithms}
+\label{sec:org9143d82}
+\subsubsection*{Custom Base (L)}
+\label{sec:orgf496083}
+$$
+x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
+$$
+\subsubsection*{Base 10 (c-l)}
+\label{sec:org70725ac}
+$$
+x_1 := \log(x_1)
+$$
+$$
+x_2 := \log(x_2)
+$$
+$$
+x_3 := \log(x_3)
+$$
+$$
+...
+$$
+$$
+x_n := \log(x_n)
+$$
+\subsubsection*{Natural log (c-L)}
+\label{sec:org665a39b}
+$$
+x_1 := \ln(x_1)
+$$
+$$
+x_2 := \ln(x_2)
+$$
+$$
+x_3 := \ln(x_3)
+$$
+$$
+...
+$$
+$$
+x_n := \ln(x_n)
+$$
 \section*{Roots}
-\label{sec:org9e04a3a}
+\label{sec:orgaf723a0}
 \subsection*{Square Root (q)}
-\label{sec:org3cca987}
-For each element in the array
+\label{sec:org87765cf}
 $$
 x_1 := \sqrt{x_1}
 $$
@@ -131,11 +166,11 @@ $$
 x_n := \sqrt{x_n}
 $$
 \section*{Statistics}
-\label{sec:orgea2adc0}
+\label{sec:org868fb1d}
 \subsection*{Maximum (M)}
-\label{sec:orgf1a52ff}
+\label{sec:org4a38845}
 x\textsubscript{1} := MIN \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
 \subsection*{Minimum (m)}
-\label{sec:orgcbb4519}
+\label{sec:org2127d9f}
 x\textsubscript{1} := MAX \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
 \end{document}

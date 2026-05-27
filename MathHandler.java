@@ -82,14 +82,32 @@ class MathHandler {
         double result = mainQueue.poll();
 
         while(!mainQueue.isEmpty()) {
-            result = customLog(result, mainQueue.poll());
+            result = Math.log(mainQueue.poll()) / Math.log(result);
         }
 
         mainQueue.add(result);
     }
 
-    private static double customLog(double base, double logNumber) {
-        return Math.log(logNumber) / Math.log(base);
+    void logQueueBaseE() {
+        Queue<Double> resultQueue = new ArrayDeque<>();
+
+        while(!mainQueue.isEmpty()) {
+            resultQueue.add(Math.log(mainQueue.poll()));
+        }
+
+        mainQueue.clear();
+        mainQueue = resultQueue;
+    }
+        
+    void logQueueBase10() {
+        Queue<Double> resultQueue = new ArrayDeque<>();
+
+        while(!mainQueue.isEmpty()) {
+            resultQueue.add(Math.log10(mainQueue.poll()));
+        }
+
+        mainQueue.clear();
+        mainQueue = resultQueue;
     }
 
     void sqrtQueue() {

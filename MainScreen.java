@@ -83,14 +83,21 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
-                // Moving the cursor
+
                 if(e.getCode() == KeyCode.H) {
                     currentIndex = 0;
+                }
+
+                if(e.getCode() == KeyCode.L && e.isShiftDown() && e.isControlDown()) {
+                    mathHandlerArray[currentIndex].logQueueBaseE();
+                } else if(e.getCode() == KeyCode.L && e.isControlDown()) {
+                    mathHandlerArray[currentIndex].logQueueBase10();
                 } else if(e.getCode() == KeyCode.L && e.isShiftDown()) {
                     mathHandlerArray[currentIndex].logQueue();
-                }else if(e.getCode() == KeyCode.L) {
+                } else if(e.getCode() == KeyCode.L) {
                     currentIndex = 1;
                 }
+                
 
                 // Agrigating the MathHandlers
                 if(e.getCode() == KeyCode.H && e.isShiftDown()) {
@@ -171,6 +178,7 @@ public class MainScreen extends Application {
                     queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, true));
                     
                 }
+
             });
 
 
