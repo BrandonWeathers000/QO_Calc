@@ -133,10 +133,26 @@ public class MainScreen extends Application {
                     mathHandlerArray[currentIndex].sqrtQueue();
                 }
 
-				if(e.getCode() == KeyCode.M  && e.isShiftDown()) {
+                if(e.getCode() == KeyCode.M && e.isControlDown() && e.isShiftDown()) {
+                    mathHandlerArray[currentIndex].findGeoMean();
+                } else if(e.getCode() == KeyCode.M && e.isControlDown()) {
+                    mathHandlerArray[currentIndex].findMean();
+                }else if(e.getCode() == KeyCode.M  && e.isShiftDown()) {
                     mathHandlerArray[currentIndex].findMaxQueue();
                 } else if((e.getCode() == KeyCode.M)) {
                     mathHandlerArray[currentIndex].findMinQueue();
+                }
+
+                if(e.getCode() == KeyCode.E) {
+                    mathHandlerArray[currentIndex].findMedian();
+                }
+
+                if(e.getCode() == KeyCode.O) {
+                    mathHandlerArray[currentIndex].findMode();
+                }
+
+                if(e.getCode() == KeyCode.D) {
+                    mathHandlerArray[currentIndex].findStandardDeviation();
                 }
 
                 // Entering digits and decimal point
@@ -182,8 +198,6 @@ public class MainScreen extends Application {
                 }
 
             });
-
-
         // Possibly helps
         stage.setScene(scene);
         stage.show();

@@ -132,6 +132,32 @@ x_1 := \sqrt[x_1]{\sqrt[x_2]{\sqrt[x_3]{...\sqrt[x_{n-1}]{x_n}}}}
 $$
 * Statistics
 ** Maximum (M)
+$$
 x_1 := MIN {x_1, x_2, x_3, ... x_n}
+$$
 ** Minimum (m)
+$$
 x_1 := MAX {x_1, x_2, x_3, ... x_n}
+$$
+** Arithmetic Mean (c-m)
+$$
+x_1 := \frac{x_1 + x_2 + x_3 + ... + x_n}{n}
+$$
+** Geometric Mean (c-M)
+$$
+x_1 := \frac{x_1 * x_2 * x_3 * ... * x_n}{n}
+$$
+** Median (e)
+$$
+x_1 := x_{\frac{n}{2}}
+$$
+or
+$$
+x_1 := x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}
+$$
+** Mode (o)
+This function fills the selected queue with the most common elements of the selected list.
+** Standard Deviation (d)
+$$
+x_1 := \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar x)^2}{n}}
+$$
