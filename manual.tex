@@ -1,4 +1,4 @@
-% Created 2026-05-27 Wed 19:08
+% Created 2026-05-27 Wed 22:50
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt]{article}
 
@@ -27,7 +27,7 @@
 
 \maketitle
 \section*{Introduction}
-\label{sec:orgaa6d5f5}
+\label{sec:org48190ca}
 This is a calculator based on the queue data structure.
 There is a master queue, which your cursor in on by default, and a sub-queue, used for auxiliary calculations.
 By default you enter numbers into a given queue and then press a operation to act over that function.
@@ -37,18 +37,18 @@ In the function heading the title of each sub-heading is the title of the operat
 When referring to a single arbitrary queue its elements will be named from x\textsubscript{1} to x\textsubscript{n}.
 When referring specifically to the master and sub-queues, they will be named a\textsubscript{1} to a\textsubscript{n} and b\textsubscript{1} to b\textsubscript{n} accordingly.
 \section*{General}
-\label{sec:orgaeed829}
+\label{sec:org9e27c45}
 \subsection*{Move Cursor Right (l)}
-\label{sec:org56c7db8}
+\label{sec:org95fa8f0}
 Moves the cursor to the right to select the rightmost queue.
 \subsection*{Move Cursor Left (h)}
-\label{sec:orgf0b8ed5}
+\label{sec:org7138edc}
 Moves the cursor to the left to select the leftmost  queue.
 \subsection*{Clear Selected Queue (c)}
-\label{sec:org0674b7e}
+\label{sec:org4d18381}
 Removes all elements from the selected queues.
 \subsection*{Agreegate All Queues to the Right (H)}
-\label{sec:org1ab5d1a}
+\label{sec:org2fa4995}
 No matter which queue the cursor is on, all elements get appended to the end of the master queue.
 $$
 x_1 := x_1
@@ -72,48 +72,48 @@ $$
 x_{n} := y_{m}
 $$
 \section*{Arithmetic}
-\label{sec:orgcfeb041}
+\label{sec:org2f55434}
 \subsection*{Addition (+)}
-\label{sec:org77fc77f}
+\label{sec:org34308df}
 $$
 x_1 := (...((x_1 + x_2) + x_3) + ... + x_n)
 $$
 \subsection*{Subtraction (-)}
-\label{sec:org8f6d595}
+\label{sec:org29b6ef6}
 $$
 x_1 := (...((x_1 - x_2) - x_3) - ... - x_n)
 $$
 \subsection*{Multiplication (*)}
-\label{sec:orgb42ba69}
+\label{sec:orga2a1305}
 $$
 x_1 := (...((x_1 * x_2) * x_3) * ... * x_n)
 $$
 \subsection*{Division (/)}
-\label{sec:org5be118e}
+\label{sec:org6a3938b}
 $$
 x_1 := \frac{\frac{\frac{x_1}{x_2}}{x_3}}{...x_n}
 $$
 \subsection*{Exponentiation}
-\label{sec:orgd83f8ea}
+\label{sec:org8f4c9b9}
 \subsubsection*{Left-to-right exponentiation (\^{})}
-\label{sec:org641c6c0}
+\label{sec:org67f07d7}
 $$
 x_1 := ((x_1^{x_2})^{x_3})^{...x_n}
 $$
 \subsubsection*{Right-to-left exponentiation (c-\^{})}
-\label{sec:org2a56414}
+\label{sec:orgd1492af}
 $$
 x_1 := x_1^{x_2^{x_3^{...x_n}}}
 $$
 \subsection*{Logarithms}
-\label{sec:orgdc3989c}
+\label{sec:org647856b}
 \subsubsection*{Custom Base (L)}
-\label{sec:org2f23cf0}
+\label{sec:org1f59ef8}
 $$
 x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
 $$
 \subsubsection*{Base 10 (c-l)}
-\label{sec:orgffe5156}
+\label{sec:org67a93ca}
 $$
 x_1 := \log(x_1)
 $$
@@ -130,7 +130,7 @@ $$
 x_n := \log(x_n)
 $$
 \subsubsection*{Natural log (c-L)}
-\label{sec:org9b876bf}
+\label{sec:org36134e6}
 $$
 x_1 := \ln(x_1)
 $$
@@ -147,14 +147,14 @@ $$
 x_n := \ln(x_n)
 $$
 \subsection*{Logarithms (L)}
-\label{sec:org949e339}
+\label{sec:orgb853b2d}
 $$
 x_1 := \log..._{\log_{\log_{x_1}(x_2)}(x_3)}(x_n)
 $$
 \section*{Roots}
-\label{sec:org4513076}
+\label{sec:org2b5f158}
 \subsection*{Square Root (q)}
-\label{sec:orgf341055}
+\label{sec:orgd1e5c3f}
 $$
 x_1 := \sqrt{x_1}
 $$
@@ -171,16 +171,47 @@ $$
 x_n := \sqrt{x_n}
 $$
 \subsection*{Custom Square Root (Q)}
-\label{sec:org4172a50}
+\label{sec:org431825b}
 $$
 x_1 := \sqrt[x_1]{\sqrt[x_2]{\sqrt[x_3]{...\sqrt[x_{n-1}]{x_n}}}}
 $$
 \section*{Statistics}
-\label{sec:org3251d40}
+\label{sec:org15e727d}
 \subsection*{Maximum (M)}
-\label{sec:org6bf0e82}
-x\textsubscript{1} := MIN \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
+\label{sec:org5076f06}
+$$
+x_1 := MIN {x_1, x_2, x_3, ... x_n}
+$$
 \subsection*{Minimum (m)}
-\label{sec:org250a6ed}
-x\textsubscript{1} := MAX \{x\textsubscript{1}, x\textsubscript{2}, x\textsubscript{3}, \ldots{} x\textsubscript{n}\}
+\label{sec:org71ff885}
+$$
+x_1 := MAX {x_1, x_2, x_3, ... x_n}
+$$
+\subsection*{Arithmetic Mean (c-m)}
+\label{sec:org88a92ab}
+$$
+x_1 := \frac{x_1 + x_2 + x_3 + ... + x_n}{n}
+$$
+\subsection*{Geometric Mean (c-M)}
+\label{sec:org6dc6841}
+$$
+x_1 := \frac{x_1 * x_2 * x_3 * ... * x_n}{n}
+$$
+\subsection*{Median (e)}
+\label{sec:org2efaa02}
+$$
+x_1 := x_{\frac{n}{2}}
+$$
+or
+$$
+x_1 := x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}
+$$
+\subsection*{Mode (o)}
+\label{sec:orgb894ea2}
+This function fills the selected queue with the most common elements of the selected list.
+\subsection*{Standard Deviation (d)}
+\label{sec:org981e16c}
+$$
+x_1 := \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar x)^2}{n}}
+$$
 \end{document}

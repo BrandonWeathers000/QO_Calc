@@ -1,7 +1,9 @@
 # QO_Calc
-This is a calculator based on the queue data structure. I hope you find it useful.
+This is a calculator based on the queue data structure.
 
-*Please refer to the pdf documentation to use this app.*
+I hope you find it useful.
+
+**Please refer to the pdf documentation to use this app.**
 
 ## How to run
 1. Download JavaFX
@@ -11,9 +13,8 @@ This is a calculator based on the queue data structure. I hope you find it usefu
 ## Development Roadmap
 1. Migration to the BigDecimal class
 2. Addition useful functions
-    1. Arithmetic mean, geometric mean, median, mode, and standard deviation
-    2. Factorials, combinatorics, and permutations
-    3. Trig functions (sine, cosine, tangent, arcsine, arccosine, arctangent, hyperbolic sine, hyperbolic cosine, and hyperbolic tangent)
+    1. Factorials, combinatorics, and permutations
+    2. Trig functions (sine, cosine, tangent, arcsine, arccosine, arctangent, hyperbolic sine, hyperbolic cosine, and hyperbolic tangent)
 3. Support for four queues
 4. Constants (pi, e, and phi)
 5. Special exponentiation (e^x, 10^x)
