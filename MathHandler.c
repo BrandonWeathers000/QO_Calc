@@ -1,6 +1,6 @@
 /*
-    AUTHOR: Brandon Weathers
-    DATE LAST MODIFIED: 6/14/2026
+    Author: Brandon Weathers
+    Date last modified: 6/14/2026
 */
 
 #include<stdbool.h>
@@ -62,31 +62,51 @@ void printQueue(Queue *q) {
     }
 
     for (int i = q->front + 1; i < q->rear; i++) {
-        printf("%.2f\n", q->items[i]);
+        printf("%.3f\n", q->items[i]);
     }
 }
 
-// Set result = 0.0 when calling
 void addQueue(Queue *q, double result) {
-    if(isEmpty(q)) {
-        enqueue(q, result);
-    }else {
-        result += peek(q);
-        dequeue(q);
-
-        addQueue(q, result);
-    }
-}
-
-void subtractQueue(Queue *q, double result) {
-    printf("The current result is: %f\n", result);
     dequeue(q);
 
     if(isEmpty(q)) {
         enqueue(q, result);
     }else {
-        result = result - peek(q);
+        result += peek(q);
+        addQueue(q, result);
+    }
+}
+
+void subtractQueue(Queue *q, double result) {
+    dequeue(q);
+
+    if(isEmpty(q)) {
+        enqueue(q, result);
+    }else {
+        result -= peek(q);
         subtractQueue(q, result);
+    }
+}
+
+void multiplyQueue(Queue *q, double result) {
+    dequeue(q);
+
+    if(isEmpty(q)) {
+        enqueue(q, result);
+    }else {
+        result *= peek(q);
+        multiplyQueue(q, result);
+    }
+}
+
+void divideQueue(Queue *q, double result) {
+    dequeue(q);
+
+    if(isEmpty(q)) {
+        enqueue(q, result);
+    }else {
+        result /= peek(q);
+        divideQueue(q, result);
     }
 }
 
@@ -94,11 +114,13 @@ double main() {
     Queue mainQueue;
     initializeQueue(&mainQueue);
 
-    enqueue(&mainQueue, 1.0);
     enqueue(&mainQueue, 2.0);
     enqueue(&mainQueue, 3.0);
-    /* addQueue(&mainQueue, 0.0); */
-    subtractQueue(&mainQueue, peek(&mainQueue));
+    enqueue(&mainQueue, 4.0);
+    /* addQueue(&mainQueue, peek(&mainQueue)); */
+    /* subtractQueue(&mainQueue, peek(&mainQueue)); */
+    /* multiplyQueue(&mainQueue, peek(&mainQueue)); */
+    divideQueue(&mainQueue, peek(&mainQueue));
 
     printQueue(&mainQueue);
 
