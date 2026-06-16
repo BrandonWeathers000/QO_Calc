@@ -1,6 +1,6 @@
 /*
     Author: Brandon Weathers
-    Date last modified: 6/14/2026
+    Date last modified: 6/16/2026
     I want to rewrite all of these function so that they return a value
     rather than manipulate the queue (and return void).
 */
@@ -8,6 +8,7 @@
 #include<stdbool.h>
 #include<stdio.h>
 #include<math.h>
+
 #define MAX_SIZE 1000
 
 // Start of data structures
@@ -31,8 +32,7 @@ bool isFull(Queue *q) {
 }
 
 void enqueue(Queue *q, double value) {
-    if (isFull(q))
-    {
+    if (isFull(q)) {
         printf("Queue is full\n");
         return;
     }
@@ -41,8 +41,7 @@ void enqueue(Queue *q, double value) {
 }
 
 void dequeue(Queue *q) {
-    if (isEmpty(q))
-    {
+    if (isEmpty(q)) {
         printf("Queue is empty\n");
         return;
     }
@@ -52,7 +51,7 @@ void dequeue(Queue *q) {
 double peek(Queue *q) {
     if (isEmpty(q)) {
         printf("Queue is empty\n");
-        return -1; // return some default value or handle
+        return NAN; // Return some default value or handle
                    // error differently
     }
     return q->items[q->front + 1];
@@ -64,81 +63,110 @@ void printQueue(Queue *q) {
         return;
     }
 
+    printf("┌─────────────────┐\n");
+    printf("│  Queue (master) │\n");
+    printf("├─────────────────┤\n");
+
     for (int i = q->front + 1; i < q->rear; i++) {
-        printf("%.3f\n", q->items[i]);
+        printf("│%-17.2f│\n", q->items[i]);
     }
 }
-
 // End of data structures
 
-void addQueue(Queue *q, double result) {
+double addQueue(Queue *q, double result) {
     dequeue(q);
 
     if(isEmpty(q)) {
-        enqueue(q, result);
-    }else {
-        result += peek(q);
-        addQueue(q, result);
+        return result;
     }
+
+    return addQueue(q, result + peek(q));
 }
 
-void subtractQueue(Queue *q, double result) {
+double subtractQueue(Queue *q, double result) {
     dequeue(q);
 
     if(isEmpty(q)) {
-        enqueue(q, result);
-    }else {
-        result -= peek(q);
-        subtractQueue(q, result);
+        return result;
     }
+
+    return subtractQueue(q, result - peek(q));
 }
 
-void multiplyQueue(Queue *q, double result) {
+double multiplyQueue(Queue *q, double result) {
     dequeue(q);
 
     if(isEmpty(q)) {
-        enqueue(q, result);
-    }else {
-        result *= peek(q);
-        multiplyQueue(q, result);
+        return result;
     }
+
+    return multiplyQueue(q, result * peek(q));
 }
 
-void divideQueue(Queue *q, double result) {
+double divideQueue(Queue *q, double result) {
     dequeue(q);
 
     if(isEmpty(q)) {
-        enqueue(q, result);
-    }else {
-        result /= peek(q);
-        divideQueue(q, result);
+        return result;
     }
+
+    return divideQueue(q, result / peek(q));
 }
 
-/* double expoQueueLeftToRight(Queue *q, double result, double expo) { */
-/*     dequeue(q); */
+double expoQueueRightToLeft(Queue *q) {
+    double base = peek(q);
+    dequeue(q);
+    if(base == 1.0) {
+        return 1;
+    }else if(base == 0.0) {
+        return NAN;
+    }
 
-/*     if (!isEmpty(q)) { */
-/*         return peek(q) * expoQueueLeftToRight(q, result, expo); */
-/*     } else { */
-/*         return powf(result, expo); */
-/*     } */
-/* } */
+    double expo = peek(q);
+    dequeue(q);
 
-double main() {
+    while(!isEmpty(q)) {
+        expo *= peek(q);
+        dequeue(q);
+    }
+
+    return powf(base, expo);
+}
+
+double logQueue(Queue *q, double result) {
+    dequeue(q);
+
+    if(isEmpty(q)) {
+        return result;
+    }
+
+    return logQueue(q, log(peek(q)) / log(result));
+}
+
+int main() {
     Queue mainQueue;
     initializeQueue(&mainQueue);
 
     enqueue(&mainQueue, 2.0);
     enqueue(&mainQueue, 3.0);
     enqueue(&mainQueue, 4.0);
-    /* addQueue(&mainQueue, peek(&mainQueue)); */
-    /* subtractQueue(&mainQueue, peek(&mainQueue)); */
-    /* multiplyQueue(&mainQueue, peek(&mainQueue)); */
-    /* divideQueue(&mainQueue, peek(&mainQueue)); */
+    enqueue(&mainQueue, 5.0);
+    enqueue(&mainQueue, 6.0);
+    enqueue(&mainQueue, 7.0);
+    enqueue(&mainQueue, 8.0);
+    enqueue(&mainQueue, 9.0);
+    enqueue(&mainQueue, 10.0);
 
-    /* enqueue(&mainQueue, expoQueueLeftToRight(&mainQueue, peek(&mainQueue), 0.0)); */
+    printQueue(&mainQueue);
 
+    enqueue(&mainQueue, addQueue(&mainQueue, peek(&mainQueue)));
+    /* enqueue(&mainQueue, subtractQueue(&mainQueue, peek(&mainQueue))); */
+    /* enqueue(&mainQueue, multiplyQueue(&mainQueue, peek(&mainQueue))); */
+    /* enqueue(&mainQueue, divideQueue(&mainQueue, peek(&mainQueue))); */
+    /* enqueue(&mainQueue, expoQueueRightToLeft(&mainQueue)); */
+    /* enqueue(&mainQueue, logQueue(&mainQueue, peek(&mainQueue))); */
+
+    printf("\n");
     printQueue(&mainQueue);
 
     return 0;
