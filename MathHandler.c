@@ -1,12 +1,16 @@
 /*
     Author: Brandon Weathers
     Date last modified: 6/14/2026
+    I want to rewrite all of these function so that they return a value
+    rather than manipulate the queue (and return void).
 */
 
 #include<stdbool.h>
 #include<stdio.h>
+#include<math.h>
 #define MAX_SIZE 1000
 
+// Start of data structures
 typedef struct {
     double items[MAX_SIZE];
     int front;
@@ -45,7 +49,6 @@ void dequeue(Queue *q) {
     q->front++;
 }
 
-// Function to get the element at the front of the queue
 double peek(Queue *q) {
     if (isEmpty(q)) {
         printf("Queue is empty\n");
@@ -65,6 +68,8 @@ void printQueue(Queue *q) {
         printf("%.3f\n", q->items[i]);
     }
 }
+
+// End of data structures
 
 void addQueue(Queue *q, double result) {
     dequeue(q);
@@ -110,6 +115,16 @@ void divideQueue(Queue *q, double result) {
     }
 }
 
+/* double expoQueueLeftToRight(Queue *q, double result, double expo) { */
+/*     dequeue(q); */
+
+/*     if (!isEmpty(q)) { */
+/*         return peek(q) * expoQueueLeftToRight(q, result, expo); */
+/*     } else { */
+/*         return powf(result, expo); */
+/*     } */
+/* } */
+
 double main() {
     Queue mainQueue;
     initializeQueue(&mainQueue);
@@ -120,7 +135,9 @@ double main() {
     /* addQueue(&mainQueue, peek(&mainQueue)); */
     /* subtractQueue(&mainQueue, peek(&mainQueue)); */
     /* multiplyQueue(&mainQueue, peek(&mainQueue)); */
-    divideQueue(&mainQueue, peek(&mainQueue));
+    /* divideQueue(&mainQueue, peek(&mainQueue)); */
+
+    /* enqueue(&mainQueue, expoQueueLeftToRight(&mainQueue, peek(&mainQueue), 0.0)); */
 
     printQueue(&mainQueue);
 
