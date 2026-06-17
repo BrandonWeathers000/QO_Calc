@@ -58,18 +58,21 @@ double peek(Queue *q) {
 }
 
 void printQueue(Queue *q) {
+    printf("┌────────────────┐\n");
+    printf("│ Queue (master) │\n");
+    printf("├────────────────┤\n");
+
     if (isEmpty(q)) {
-        printf("Queue is empty\n");
+        printf("│ Empty          │\n");
+        printf("└────────────────┘\n");
         return;
     }
 
-    printf("┌─────────────────┐\n");
-    printf("│  Queue (master) │\n");
-    printf("├─────────────────┤\n");
-
     for (int i = q->front + 1; i < q->rear; i++) {
-        printf("│%-17.2f│\n", q->items[i]);
+        printf("│%-16.2f│\n", q->items[i]);
     }
+
+    printf("└────────────────┘\n");
 }
 // End of data structures
 
@@ -141,33 +144,4 @@ double logQueue(Queue *q, double result) {
     }
 
     return logQueue(q, log(peek(q)) / log(result));
-}
-
-int main() {
-    Queue mainQueue;
-    initializeQueue(&mainQueue);
-
-    enqueue(&mainQueue, 2.0);
-    enqueue(&mainQueue, 3.0);
-    enqueue(&mainQueue, 4.0);
-    enqueue(&mainQueue, 5.0);
-    enqueue(&mainQueue, 6.0);
-    enqueue(&mainQueue, 7.0);
-    enqueue(&mainQueue, 8.0);
-    enqueue(&mainQueue, 9.0);
-    enqueue(&mainQueue, 10.0);
-
-    printQueue(&mainQueue);
-
-    enqueue(&mainQueue, addQueue(&mainQueue, peek(&mainQueue)));
-    /* enqueue(&mainQueue, subtractQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, multiplyQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, divideQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, expoQueueRightToLeft(&mainQueue)); */
-    /* enqueue(&mainQueue, logQueue(&mainQueue, peek(&mainQueue))); */
-
-    printf("\n");
-    printQueue(&mainQueue);
-
-    return 0;
 }
