@@ -1,16 +1,11 @@
-#include<stdbool.h>
-#include<stdio.h>
-#include<math.h>
+#include <ctype.h>
+#include <string.h>
+#include <math.h>
+#include <regex.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "MathHandler.h"
-
-void acceptInput(Queue *q){
-    double userInput = NAN;
-    printf("Input: ");
-    scanf("%lf", &userInput);
-    printf("\n");
-
-    enqueue(q, userInput);
-}
 
 int main() {
     Queue mainQueue;
@@ -18,7 +13,29 @@ int main() {
 
     while(1) {
         printQueue(&mainQueue);
-        acceptInput(&mainQueue);
+
+        char input[100];
+        char *endptr;
+        double value;
+
+        fgets(input, sizeof(input), stdin);
+
+        value = strtod(input, &endptr);
+
+        if(*endptr == '+') {
+            enqueue(&mainQueue, addQueue(&mainQueue, peek(&mainQueue)));
+        } else if(*endptr == '-') {
+            enqueue(&mainQueue, subtractQueue(&mainQueue, peek(&mainQueue)));
+        } else if(*endptr == '*') {
+            enqueue(&mainQueue, multiplyQueue(&mainQueue, peek(&mainQueue)));
+        } else if(*endptr == '/') {
+            enqueue(&mainQueue, divideQueue(&mainQueue, peek(&mainQueue)));
+        } else if (*endptr == '\n' || *endptr == '\0') {
+            enqueue(&mainQueue, value);
+        } else {
+            printf("Error");
+        }
+
     }
 
     /* enqueue(&mainQueue, addQueue(&mainQueue, peek(&mainQueue))); */
