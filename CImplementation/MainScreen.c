@@ -33,17 +33,10 @@ int main() {
         } else if (*endptr == '\n' || *endptr == '\0') {
             enqueue(&mainQueue, value);
         } else {
-            printf("Error");
+            printf("Please enter valid input\n");
         }
 
     }
-
-    /* enqueue(&mainQueue, addQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, subtractQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, multiplyQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, divideQueue(&mainQueue, peek(&mainQueue))); */
-    /* enqueue(&mainQueue, expoQueueRightToLeft(&mainQueue)); */
-    /* enqueue(&mainQueue, logQueue(&mainQueue, peek(&mainQueue))); */
 
     return 0;
 }
