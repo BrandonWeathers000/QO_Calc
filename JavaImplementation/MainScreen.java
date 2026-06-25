@@ -68,7 +68,7 @@ public class MainScreen extends Application {
         Line myLine = new Line();
         myLine.setStartX(0.0);
         myLine.setStartY(0.0);
-        myLine.setEndX(1000.0);
+        myLine.setEndX(Screen.getPrimary().getBounds().getWidth());
         myLine.setEndY(0.0);
         myLine.setStyle("-fx-stroke: white;");
 
