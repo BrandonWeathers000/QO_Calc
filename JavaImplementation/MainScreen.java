@@ -1,6 +1,5 @@
 /**
  * TODO:
- * - Add multiple queues
  * - Fix rounding errors with special BigDecimal class
  */
 
@@ -83,78 +82,6 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
-
-                if(e.getCode() == KeyCode.H) {
-                    currentIndex = 0;
-                }
-
-                if(e.getCode() == KeyCode.L && e.isShiftDown() && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].logQueueBaseE();
-                } else if(e.getCode() == KeyCode.L && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].logQueueBase10();
-                } else if(e.getCode() == KeyCode.L && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].logQueue();
-                } else if(e.getCode() == KeyCode.L) {
-                    currentIndex = 1;
-                }
-                
-
-                // Agrigating the MathHandlers
-                if(e.getCode() == KeyCode.H && e.isShiftDown()) {
-                    queueAgrigator(mathHandlerArray);
-                }
-
-                // Operations
-                if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) {
-                    mathHandlerArray[currentIndex].addQueue();
-                }
-
-                if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
-                    mathHandlerArray[currentIndex].subQueue();   
-                }
-
-				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
-                    mathHandlerArray[currentIndex].mulQueue();   
-                }
-
-				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
-                    mathHandlerArray[currentIndex].divQueue();
-                }
-
-				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown() && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].expoQueueTopToBottom();
-                } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].expoQueueLeftToRight();
-                }
-
-                if(e.getCode() == KeyCode.Q && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].customSqrtQueue();
-                } else if(e.getCode() == KeyCode.Q) {
-                    mathHandlerArray[currentIndex].sqrtQueue();
-                }
-
-                if(e.getCode() == KeyCode.M && e.isControlDown() && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].findGeoMean();
-                } else if(e.getCode() == KeyCode.M && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].findMean();
-                }else if(e.getCode() == KeyCode.M  && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].findMaxQueue();
-                } else if((e.getCode() == KeyCode.M)) {
-                    mathHandlerArray[currentIndex].findMinQueue();
-                }
-
-                if(e.getCode() == KeyCode.E) {
-                    mathHandlerArray[currentIndex].findMedian();
-                }
-
-                if(e.getCode() == KeyCode.O) {
-                    mathHandlerArray[currentIndex].findMode();
-                }
-
-                if(e.getCode() == KeyCode.D) {
-                    mathHandlerArray[currentIndex].findStandardDeviation();
-                }
-
                 // Entering digits and decimal point
 				if(e.getText().matches("\\.")) { // Decimals and number
                     if(currentInput.contains(".")) {
@@ -175,7 +102,48 @@ public class MainScreen extends Application {
                     }
                 }
 
-                // Press (Enter) the new input
+                /// OPERATIONS ///
+
+                // Accounting for shift 
+                if(e.isShiftDown()) {
+                    switch(e.getCode()) {
+                        case KeyCode.LEFT:
+                            queueAgrigator(mathHandlerArray);
+                            break;
+                        default:
+                            System.out.println("Something other operation");
+                            break;
+                    }
+                }
+
+                // Non modifier operations
+                switch(e.getCode()){
+                    case KeyCode.ADD:
+                        mathHandlerArray[currentIndex].addQueue();
+                        break;
+                    case KeyCode.SUBTRACT:
+                        mathHandlerArray[currentIndex].subQueue();
+                        break;
+                    case KeyCode.MULTIPLY:
+                        mathHandlerArray[currentIndex].mulQueue();
+                        break;
+                    case KeyCode.DIVIDE:
+                        mathHandlerArray[currentIndex].divQueue();
+                        break;
+                    case KeyCode.LEFT: // Numpad arrow
+                        System.out.println("Going left");
+                        currentIndex = 0;
+                        break;
+                    case KeyCode.RIGHT: // Numpad arrow
+                        System.out.println("Going right");
+                        currentIndex = 1;
+                        break;
+                    default:
+                        System.out.println("Something other operation");
+                        break;
+                }
+
+                // Enter the new input
                 if(e.getCode() == KeyCode.ENTER) {
                     mathHandlerArray[currentIndex].mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
@@ -188,6 +156,7 @@ public class MainScreen extends Application {
                     input.setText("\nInput: ");
                 }
 
+                // Setting
                 if(currentIndex == 0) {
                     queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, true));
                     queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, false));
@@ -196,8 +165,8 @@ public class MainScreen extends Application {
                     queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, true));
                     
                 }
-
             });
+
         // Possibly helps
         stage.setScene(scene);
         stage.show();
