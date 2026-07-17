@@ -82,37 +82,45 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
-                // Entering digits and decimal point
-				if(e.getText().matches("\\.")) { // Decimals and number
-                    if(currentInput.contains(".")) {
-                    }else {
+                /// OPERATIONS ///
+                // Accounting for shift 
+                if(e.isControlDown()) {
+                    currentInput = "";
+
+                    if(e.isShiftDown() && (e.getCode() == KeyCode.DIGIT1 || e.getCode() == KeyCode.NUMPAD1)) {
+                        System.out.println("Queue agrigator");
+                        queueAgrigator(mathHandlerArray);
+                    }
+
+                    switch(e.getCode()){
+                        case KeyCode.DIGIT1:
+                            System.out.println("On master queue");
+                            currentIndex = 0;
+                            break;
+                        case KeyCode.NUMPAD1:
+                            System.out.println("On master queue");
+                            currentIndex = 0;
+                            break;
+                        case KeyCode.DIGIT2:
+                            System.out.println("On sub queue");
+                            currentIndex = 1;
+                            break;
+                        case KeyCode.NUMPAD2:
+                            System.out.println("On sub queue");
+                            currentIndex = 1;
+                            break;
+                    }
+                }else {
+                    // Entering digits and decimal point
+                    if(e.getText().matches("\\.")) { // Decimals and number
+                        if(currentInput.contains(".")) {
+                        }else {
+                            currentInput += e.getText();
+                            input.setText("\nInput: " + currentInput);
+                        }
+                    } else if(e.getText().matches("[0-9]")) {
                         currentInput += e.getText();
                         input.setText("\nInput: " + currentInput);
-                    }
-                } else if(e.getText().matches("[0-9]")) {
-                    currentInput += e.getText();
-                    input.setText("\nInput: " + currentInput);
-                }
-
-                // Deleting input digits
-                if(e.getCode() == KeyCode.BACK_SPACE) {
-                    if(!currentInput.isEmpty()) {
-                        currentInput = currentInput.substring(currentIndex, currentInput.length() - 1);
-                        input.setText("\nInput: " + currentInput);
-                    }
-                }
-
-                /// OPERATIONS ///
-
-                // Accounting for shift 
-                if(e.isShiftDown()) {
-                    switch(e.getCode()) {
-                        case KeyCode.LEFT:
-                            queueAgrigator(mathHandlerArray);
-                            break;
-                        default:
-                            System.out.println("Something other operation");
-                            break;
                     }
                 }
 
@@ -130,17 +138,17 @@ public class MainScreen extends Application {
                     case KeyCode.DIVIDE:
                         mathHandlerArray[currentIndex].divQueue();
                         break;
-                    case KeyCode.LEFT: // Numpad arrow
-                        System.out.println("Going left");
-                        currentIndex = 0;
-                        break;
-                    case KeyCode.RIGHT: // Numpad arrow
-                        System.out.println("Going right");
-                        currentIndex = 1;
-                        break;
                     default:
                         System.out.println("Something other operation");
                         break;
+                }
+
+                // Deleting input digits
+                if(e.getCode() == KeyCode.BACK_SPACE) {
+                    if(!currentInput.isEmpty()) {
+                        currentInput = currentInput.substring(currentIndex, currentInput.length() - 1);
+                        input.setText("\nInput: " + currentInput);
+                    }
                 }
 
                 // Enter the new input

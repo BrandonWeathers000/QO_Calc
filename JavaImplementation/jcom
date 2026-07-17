@@ -1,24 +1,17 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-    echo -e "No arguments supplied..."
+cd /home/brandon/Desktop/GeneralProgramming/GitHub.com/QO_Calc/JavaImplementation
+
+if  [[ $1 == "-c" ]]; then
+    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java
+elif [[ $1 == "-r" ]]; then
+    java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
+elif [[ $1 == "-cr" ]]; then
+    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java && java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
+else
+    echo -e "Improper arguments supplied..."
     echo -e "Possible arguments:"
     echo -e "\tc - compile the program"
     echo -e "\tr - run the program"
     echo -e "\tcr - first compile, then run the program (assumming no complication errors)"
-    exit
-fi
-
-cd /home/brandon/Desktop/GeneralProgramming/GitHub.com/QO_Calc/JavaImplementation
-
-if [[ $1 == "c" ]]; then
-    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java
-fi
-
-if [[ $1 == "r" ]]; then
-    java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
-fi
-
-if [[ $1 == "cr" ]]; then
-    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java && java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
 fi
