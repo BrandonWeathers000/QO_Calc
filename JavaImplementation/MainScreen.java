@@ -1,6 +1,5 @@
 /**
  * TODO:
- * - Add multiple queues
  * - Fix rounding errors with special BigDecimal class
  */
 
@@ -83,88 +82,65 @@ public class MainScreen extends Application {
         Scene scene = new Scene(root, 500, 500);
 
         scene.setOnKeyPressed(e -> {
+                /// OPERATIONS ///
+                // Accounting for shift 
+                if(e.isControlDown()) {
+                    currentInput = "";
 
-                if(e.getCode() == KeyCode.H) {
-                    currentIndex = 0;
-                }
+                    if(e.isShiftDown() && (e.getCode() == KeyCode.DIGIT1 || e.getCode() == KeyCode.NUMPAD1)) {
+                        System.out.println("Queue agrigator");
+                        queueAgrigator(mathHandlerArray);
+                    }
 
-                if(e.getCode() == KeyCode.L && e.isShiftDown() && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].logQueueBaseE();
-                } else if(e.getCode() == KeyCode.L && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].logQueueBase10();
-                } else if(e.getCode() == KeyCode.L && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].logQueue();
-                } else if(e.getCode() == KeyCode.L) {
-                    currentIndex = 1;
-                }
-                
-
-                // Agrigating the MathHandlers
-                if(e.getCode() == KeyCode.H && e.isShiftDown()) {
-                    queueAgrigator(mathHandlerArray);
-                }
-
-                // Operations
-                if((e.getCode() == KeyCode.EQUALS && e.isShiftDown()) || (e.getCode() == KeyCode.ADD)) {
-                    mathHandlerArray[currentIndex].addQueue();
-                }
-
-                if((e.getCode() == KeyCode.MINUS) || (e.getCode() == KeyCode.SUBTRACT)) {
-                    mathHandlerArray[currentIndex].subQueue();   
-                }
-
-				if((e.getCode() == KeyCode.DIGIT8 && e.isShiftDown()) || (e.getCode() == KeyCode.MULTIPLY)) {
-                    mathHandlerArray[currentIndex].mulQueue();   
-                }
-
-				if((e.getCode() == KeyCode.SLASH) || (e.getCode() == KeyCode.DIVIDE)) {
-                    mathHandlerArray[currentIndex].divQueue();
-                }
-
-				if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown() && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].expoQueueTopToBottom();
-                } else if(e.getCode() == KeyCode.DIGIT6 && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].expoQueueLeftToRight();
-                }
-
-                if(e.getCode() == KeyCode.Q && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].customSqrtQueue();
-                } else if(e.getCode() == KeyCode.Q) {
-                    mathHandlerArray[currentIndex].sqrtQueue();
-                }
-
-                if(e.getCode() == KeyCode.M && e.isControlDown() && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].findGeoMean();
-                } else if(e.getCode() == KeyCode.M && e.isControlDown()) {
-                    mathHandlerArray[currentIndex].findMean();
-                }else if(e.getCode() == KeyCode.M  && e.isShiftDown()) {
-                    mathHandlerArray[currentIndex].findMaxQueue();
-                } else if((e.getCode() == KeyCode.M)) {
-                    mathHandlerArray[currentIndex].findMinQueue();
-                }
-
-                if(e.getCode() == KeyCode.E) {
-                    mathHandlerArray[currentIndex].findMedian();
-                }
-
-                if(e.getCode() == KeyCode.O) {
-                    mathHandlerArray[currentIndex].findMode();
-                }
-
-                if(e.getCode() == KeyCode.D) {
-                    mathHandlerArray[currentIndex].findStandardDeviation();
-                }
-
-                // Entering digits and decimal point
-				if(e.getText().matches("\\.")) { // Decimals and number
-                    if(currentInput.contains(".")) {
-                    }else {
+                    switch(e.getCode()){
+                        case KeyCode.DIGIT1:
+                            System.out.println("On master queue");
+                            currentIndex = 0;
+                            break;
+                        case KeyCode.NUMPAD1:
+                            System.out.println("On master queue");
+                            currentIndex = 0;
+                            break;
+                        case KeyCode.DIGIT2:
+                            System.out.println("On sub queue");
+                            currentIndex = 1;
+                            break;
+                        case KeyCode.NUMPAD2:
+                            System.out.println("On sub queue");
+                            currentIndex = 1;
+                            break;
+                    }
+                }else {
+                    // Entering digits and decimal point
+                    if(e.getText().matches("\\.")) { // Decimals and number
+                        if(currentInput.contains(".")) {
+                        }else {
+                            currentInput += e.getText();
+                            input.setText("\nInput: " + currentInput);
+                        }
+                    } else if(e.getText().matches("[0-9]")) {
                         currentInput += e.getText();
                         input.setText("\nInput: " + currentInput);
                     }
-                } else if(e.getText().matches("[0-9]")) {
-                    currentInput += e.getText();
-                    input.setText("\nInput: " + currentInput);
+                }
+
+                // Non modifier operations
+                switch(e.getCode()){
+                    case KeyCode.ADD:
+                        mathHandlerArray[currentIndex].addQueue();
+                        break;
+                    case KeyCode.SUBTRACT:
+                        mathHandlerArray[currentIndex].subQueue();
+                        break;
+                    case KeyCode.MULTIPLY:
+                        mathHandlerArray[currentIndex].mulQueue();
+                        break;
+                    case KeyCode.DIVIDE:
+                        mathHandlerArray[currentIndex].divQueue();
+                        break;
+                    default:
+                        System.out.println("Something other operation");
+                        break;
                 }
 
                 // Deleting input digits
@@ -175,7 +151,7 @@ public class MainScreen extends Application {
                     }
                 }
 
-                // Press (Enter) the new input
+                // Enter the new input
                 if(e.getCode() == KeyCode.ENTER) {
                     mathHandlerArray[currentIndex].mainQueue.add(Double.valueOf(currentInput));
                     currentInput = "";
@@ -188,6 +164,7 @@ public class MainScreen extends Application {
                     input.setText("\nInput: ");
                 }
 
+                // Setting
                 if(currentIndex == 0) {
                     queue0Output.setText(returnQueuekAsString(mathHandlerArray[0].mainQueue, true));
                     queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, false));
@@ -196,8 +173,8 @@ public class MainScreen extends Application {
                     queue1Output.setText(returnQueuekAsString(mathHandlerArray[1].mainQueue, true));
                     
                 }
-
             });
+
         // Possibly helps
         stage.setScene(scene);
         stage.show();
