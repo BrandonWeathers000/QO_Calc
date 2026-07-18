@@ -1,13 +1,13 @@
 #!/bin/bash
 
-cd /home/brandon/Desktop/GeneralProgramming/GitHub.com/QO_Calc/JavaImplementation
+cd JavaImplementation/
 
 if  [[ $1 == "-c" ]]; then
-    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java
+    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java && echo "[ OK ] Compliation complete"
 elif [[ $1 == "-r" ]]; then
     java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
 elif [[ $1 == "-cr" ]]; then
-    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java && java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
+    javac --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls *.java && echo "[ OK ] Compliation complete" && java --module-path ~/javafx-sdk-25.0.3/lib --add-modules javafx.controls MainScreen
 else
     echo -e "Improper arguments supplied..."
     echo -e "Possible arguments:"
